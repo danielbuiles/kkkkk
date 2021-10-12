@@ -16,10 +16,10 @@ export default function App() {
   let personasViaje = parseInt(nroPersonas);
   let diasViaje = parseInt(nroDias);
   let costoAdicional=0;
-  let descuento=0;
+  let total;
+  let descuento = false;
   
   const viaje = () =>{
-    console.log(personasViaje);
     if (identificacion == '') {
       setError('campo identificacion esta vacio')
     }else if(nombre == ''){
@@ -41,32 +41,31 @@ export default function App() {
       }
 
       if(personasViaje>=10){
-        descuento += personasViaje*0.10;
+        descuento=true;
       }
 
-      switch (destino) {
-        case 'ca':
-          setTotalPagar(((300000*personasViaje)*diasViaje)+(costoAdicional*personasViaje)-descuento);
-          setError('')
-          descuento = 0;
-          costoAdicional =0;
-          break;
-
-        case 'sm':
-          setTotalPagar(((250000*personasViaje)*diasViaje)+(costoAdicional*personasViaje)-descuento);
-          setError('')
-          descuento= 0;
-          costoAdicional =0;
-          break;
-
-        case 'sa':
-          setTotalPagar(((200000*personasViaje)*diasViaje)+(costoAdicional*personasViaje)-descuento);
-          setError('')
-          descuento=0
-          costoAdicional =0;
-          break;
-
-      }
+        switch (destino) {
+          case 'ca':
+            total=((300000*personasViaje)*diasViaje)+(costoAdicional*personasViaje);
+            setTotalPagar((descuento)?total-(total*0.10):total);
+            setError('')
+            costoAdicional =0;
+            break;
+  
+          case 'sm':
+            total=((250000*personasViaje)*diasViaje)+(costoAdicional*personasViaje);
+            setTotalPagar((descuento)?total-(total*0.10):total);
+            setError('')
+            costoAdicional =0;
+            break;
+  
+          case 'sa':
+            total=((200000*personasViaje)*diasViaje)+(costoAdicional*personasViaje);
+            setTotalPagar((descuento)?total-(total*0.10):total);
+            setError('')
+            costoAdicional =0;
+            break;
+        }
     }
   };
 
