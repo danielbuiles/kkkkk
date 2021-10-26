@@ -225,6 +225,5 @@ const styles = StyleSheet.create({
     display:'flex',
     top:0,
     height:'20%',
-    backgroundColor:'#E7E1DF'
   }
 });
